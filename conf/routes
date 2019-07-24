@@ -3,6 +3,8 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
+GET     /                           controllers.Default.redirect(to = "/task/list")
+
 # task一覧画面
 GET     /task/list                  controllers.TaskListController.index
 # task詳細画面
