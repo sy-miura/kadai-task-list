@@ -2,6 +2,7 @@
 
 @(task: Task)(implicit messagesProvider: MessagesProvider, request: RequestHeader)
 
+
 @main(Messages("DetailTask")) {
 <div class="container">
     <h1>@Messages("DetailTask")</h1>
@@ -10,6 +11,11 @@
             <th>@Messages("Id")</th>
             <td>@task.id.get</td>
         </tr>
+        <tr>
+            <th>@Messages("Status")</th>
+            <td>@task.status.getOrElse("C")</td>
+        </tr>
+
         <tr>
             <th>@Messages("Task")</th>
             <td>@task.content</td>

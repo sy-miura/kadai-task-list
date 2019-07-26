@@ -19,7 +19,7 @@ class UpdateTaskController @Inject()(components: ControllerComponents)
 
   def index(taskId:Long): Action[AnyContent] = Action{ implicit request =>
     val result = Task.findById(taskId).get
-    val filledForm = form.fill(TaskForm(result.id, result.content))
+    val filledForm = form.fill(TaskForm(result.id, result.status.getOrElse("未対応"), result.content))
     Ok(views.html.edit(filledForm))
 
   }
@@ -32,6 +32,7 @@ class UpdateTaskController @Inject()(components: ControllerComponents)
         {model =>
           implicit val session = AutoSession
           val result = Task.updateById(model.id.get).withAttributes(
+            'status -> model.status,
             'content -> model.content,
             'updateAt -> ZonedDateTime.now()
           )
