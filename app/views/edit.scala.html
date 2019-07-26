@@ -2,7 +2,7 @@
 
 @(taskForm: Form[TaskForm])(implicit messagesProvider: MessagesProvider, request: RequestHeader)
 
-@statusseq = @{ Seq("A"->"完了","B"->"対応中","C"->"未完了") }
+@statusseq = @{ Seq("完了"->"完了","対応中"->"対応中","未対応"->"未対応") }
 
 @main(Messages("UpdateTask")) {
 
@@ -12,7 +12,7 @@
         <div class="col-xs-6">
             @b3.formCSRF(routes.UpdateTaskController.update) {
             @b3.hidden(taskForm("id").name, taskForm("id").value.get)
-            @b3.select( taskForm("status"), options = statusseq, '_label -> "Select" ,
+            @b3.select( taskForm("status"), options = statusseq, '_label -> "Status" ,
                         '_value -> taskForm("status").value.getOrElse("C"))
             @b3.text(taskForm("content"), '_label -> "Task")
             @b3.submit('class -> "btn btn-default") {
