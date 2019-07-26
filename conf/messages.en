@@ -11,3 +11,5 @@ GetTask=Task Detail
 CreateTaskError=Task creation error
 UpdateTaskError=Task update error
 DeleteTaskError=Task deletion error
+
+Id404Error=Id is not found

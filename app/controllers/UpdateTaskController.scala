@@ -31,15 +31,16 @@ class UpdateTaskController @Inject()(components: ControllerComponents)
         formWithErrors => BadRequest(views.html.edit(formWithErrors)),
         {model =>
           implicit val session = AutoSession
-          val result = Task.updateById(model.id.get).withAttributes(
+          val result:Option[Long] = model.id.map(id => Task.updateById(id).withAttributes(
             'status -> model.status,
             'content -> model.content,
             'updateAt -> ZonedDateTime.now()
-          )
-          if (result > 0) {
-            Redirect(routes.TaskListController.index())
-          } else {
-            InternalServerError(Messages("UpdateTaskError"))
+          ))
+
+          result match {
+            case Some(rtn_num) if rtn_num > 0 => Redirect(routes.TaskListController.index())
+            case Some(_) => InternalServerError(Messages("UpdateTaskError"))
+            case None => InternalServerError(Messages("Id404Error"))
           }
         }
       )

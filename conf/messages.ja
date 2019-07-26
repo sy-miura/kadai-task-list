@@ -11,3 +11,5 @@ GetTask=タスク詳細
 CreateTaskError=タスク作成エラーが発生しました。
 UpdateTaskError=タスク更新エラーが発生しました。
 DeleteTaskError=タスク作成エラーが発生しました。
+
+Id404Error=idがありません
